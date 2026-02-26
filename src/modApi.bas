@@ -25,7 +25,7 @@ Public Function GetAircraftData(ByVal TailNum As String) As clsAircraft
     Let url = SUPABASE_URL & "/rest/v1/aircraft?tail_number=eq." & TailNum
     http.Open "GET", url, False
     
-    'Set headers, el servidor espera la identificaciÛn
+    'Set headers, el servidor espera la identificaci√≥n
     http.setRequestHeader "apikey", SUPABASE_KEY
     http.setRequestHeader "Authorization", "Bearer " & SUPABASE_KEY
     
@@ -75,7 +75,7 @@ Public Function GetFuelLogs() As String
     ' Usamos la URL normal
     url = SUPABASE_URL & "/rest/v1/fuel_logs?select=*&order=id.asc"
     
-    ' CAMBIO CLAVE: Usamos ServerXMLHTTP para evitar el cachÈ de Windows
+    ' CAMBIO CLAVE: Usamos ServerXMLHTTP para evitar el cach√© de Windows
     Set http = CreateObject("MSXML2.ServerXMLHTTP.6.0")
     
     With http
@@ -136,7 +136,7 @@ Public Function PostFuelLog(ByVal TailNum As String, ByVal RemainingFuelAmount A
     Let url = SUPABASE_URL & "/rest/v1/fuel_logs" ' al insertar un avion nuevo no se filtra nada
     http.Open "POST", url, False
     
-    'AutenticaciÛn
+    'Autenticaci√≥n
     http.setRequestHeader "apikey", SUPABASE_KEY
     http.setRequestHeader "Authorization", "Bearer " & SUPABASE_KEY
     http.setRequestHeader "Content-Type", "application/json"
@@ -186,13 +186,13 @@ Set dictData = New Scripting.Dictionary
     Let url = SUPABASE_URL & "/rest/v1/fuel_logs?id=eq." & IDFuelLog ' we use ID number to link the information
     http.Open "PATCH", url, False
     
-    'AutenticaciÛn
+    'Autenticaci√≥n
     http.setRequestHeader "apikey", SUPABASE_KEY
     http.setRequestHeader "Authorization", "Bearer " & SUPABASE_KEY
     http.setRequestHeader "Content-Type", "application/json"
     http.setRequestHeader "Prefer", "return=representation"
     
-Debug.Print "URL DE ENVÕO: " & url
+Debug.Print "URL DE ENV√çO: " & url
 Debug.Print "PAYLOAD: " & EditedPayload
     'send request
     http.send EditedPayload
