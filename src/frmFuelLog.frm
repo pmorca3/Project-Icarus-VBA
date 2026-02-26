@@ -31,7 +31,7 @@ End Sub
 
 Private Sub txtPIN_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
     
-    ' El KeyCode 13 es la tecla ENTER (la que envÌan los esc·neres al final)
+    ' El KeyCode 13 es la tecla ENTER (la que env√≠an los esc√°neres al final)
     If KeyCode = 13 Then
         
         ' Anulamos el sonido de "Ding" de Windows al pulsar Enter en un TextBox
@@ -58,17 +58,17 @@ Private Sub txtPIN_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift A
             lblOperatorName.ForeColor = vbRed
             
         Else
-            ' …XITO: Mostramos el nombre en verde
+            ' √âXITO: Mostramos el nombre en verde
             lblOperatorName.Caption = operatorInfo
             lblOperatorName.ForeColor = RGB(0, 153, 0)
             
-            ' T¡CTICO: The server verified the PIN. NOW we unlock the form.
+            ' T√ÅCTICO: The server verified the PIN. NOW we unlock the form.
             cmbTailNumber.Enabled = True: cmbTailNumber.BackColor = &H80000005
             txtBase.Enabled = True: txtBase.BackColor = &H80000005
             txtDispensedFuel.Enabled = True: txtDispensedFuel.BackColor = &H80000005
             txtRemainingFuel.Enabled = True: txtRemainingFuel.BackColor = &H80000005
             
-            ' Movemos el cursor autom·ticamente a la casilla de aviÛn
+            ' Movemos el cursor autom√°ticamente a la casilla de avi√≥n
             cmbTailNumber.SetFocus
         End If
         
@@ -85,7 +85,7 @@ Private Sub btnSubmit_Click()
     Dim TailNum As String
     Dim Result As Boolean
     
-    ' 1. FRONTEND VALIDATION (Solo si est· vacÌo o no es n˙mero)
+    ' 1. FRONTEND VALIDATION (Solo si est√° vac√≠o o no es n√∫mero)
     
     If txtPIN.Value = "" Then
         MsgBox "Please type your PIN."
@@ -120,7 +120,7 @@ Private Sub btnSubmit_Click()
         Exit Sub
     End If
     
-    ' Ya es seguro convertir a n˙mero
+    ' Ya es seguro convertir a n√∫mero
     remFuel = CDbl(txtRemainingFuel.Value)
     dispFuel = CDbl(txtDispensedFuel.Value)
     
@@ -146,7 +146,7 @@ If objAircraft Is Nothing Then
         Exit Sub
     End If
     
-    ' 6. PREPARAR DATOS PARA ENVÕO
+    ' 6. PREPARAR DATOS PARA ENV√çO
     ' Usamos On Error Resume Next por si el Label no tiene el formato esperado "("
     On Error Resume Next
     PersonName = Trim(Mid(lblOperatorName.Caption, 1, (InStr(1, lblOperatorName.Caption, "(") - 1)))
@@ -156,7 +156,7 @@ If objAircraft Is Nothing Then
     Location = Trim(UCase(txtBase.Value))
     
     ' ---------------------------------------------------------
-    ' 7. L”GICA DE EDICI”N (PATCH)
+    ' 7. L√ìGICA DE EDICI√ìN (PATCH)
     ' ---------------------------------------------------------
     If Trim(UCase(Me.btnSubmit.Caption)) = "EDIT LOG" Then
         Result = modApi.UpdateFuelLog(IDFuelLog, TailNum, objLog.RemainingFuelLt, objLog.DispensedFuelLt, PersonName, Location)
@@ -164,18 +164,18 @@ If objAircraft Is Nothing Then
         If Result = True Then
             MsgBox "ENTRY EDITED", vbInformation
             
-            ' REPARACI”N: IDFuelLog es Long, para "limpiarlo" se pone a 0
+            ' REPARACI√ìN: IDFuelLog es Long, para "limpiarlo" se pone a 0
             IDFuelLog = 0
             
             ' CERRAMOS Y CORTAMOS: Esto evita el Error 91
             Unload Me
             Exit Sub
         End If
-        Exit Sub ' Si fallÛ el Update, no queremos que intente hacer un Post abajo
+        Exit Sub ' Si fall√≥ el Update, no queremos que intente hacer un Post abajo
     End If
         
     ' ---------------------------------------------------------
-    ' 8. L”GICA DE NUEVO REGISTRO (POST)
+    ' 8. L√ìGICA DE NUEVO REGISTRO (POST)
     ' ---------------------------------------------------------
     Result = modApi.PostFuelLog(TailNum, objLog.RemainingFuelLt, objLog.DispensedFuelLt, PersonName, Location)
     
