@@ -39,7 +39,7 @@ Private Sub btnEdit_Click()
     ' 2. Cargamos el form (dispara Initialize, campos quedan bloqueados)
     Load frmFuelLog
     
-    ' 3. Seteamos el caption del botón
+    ' 3. Seteamos el caption del botÃ³n
     frmFuelLog.btnSubmit.Caption = "EDIT LOG"
     
     ' 4. Habilitamos temporalmente para poder asignar valores
@@ -50,23 +50,23 @@ Private Sub btnEdit_Click()
         .txtDispensedFuel.Enabled = True: .txtDispensedFuel.BackColor = &H80000005
         .txtRemainingFuel.Enabled = True: .txtRemainingFuel.BackColor = &H80000005
         
-        ' 5. Asignamos los valores (ahora sí los acepta)
+        ' 5. Asignamos los valores (ahora sÃ­ los acepta)
         .cmbTailNumber.Value = lstLogs.List(lstLogs.ListIndex, 1)
         .txtBase.Value = lstLogs.List(lstLogs.ListIndex, 2)
         .txtDispensedFuel.Value = lstLogs.List(lstLogs.ListIndex, 3)
         .txtRemainingFuel.Value = lstLogs.List(lstLogs.ListIndex, 4)
         
-        ' 6. Volvemos a bloquear — el PIN los desbloqueará de nuevo
+        ' 6. Volvemos a bloquear â€” el PIN los desbloquearÃ¡ de nuevo
         .cmbTailNumber.Enabled = False:  .cmbTailNumber.BackColor = RGB(245, 245, 245)
         .txtBase.Enabled = False:        .txtBase.BackColor = RGB(245, 245, 245)
         .txtDispensedFuel.Enabled = False: .txtDispensedFuel.BackColor = RGB(245, 245, 245)
         .txtRemainingFuel.Enabled = False: .txtRemainingFuel.BackColor = RGB(245, 245, 245)
     End With
     
-    ' 7. Show FUERA del With — esto mata el Error 91
+    ' 7. Show FUERA del With â€” esto mata el Error 91
     frmFuelLog.Show
     
-    ' 8. Al volver aquí el form ya cerró — refrescamos
+    ' 8. Al volver aquÃ­ el form ya cerrÃ³ â€” refrescamos
     Call btnRefresh_Click
     
 End Sub
@@ -77,7 +77,7 @@ Private Sub btnRefresh_Click()
     ' 1. Vaciamos la lista actual
     Me.lstLogs.Clear
     
-    ' 2. Llamamos a la función que acabamos de mejorar
+    ' 2. Llamamos a la funciÃ³n que acabamos de mejorar
     nuevoJson = modApi.GetFuelLogs()
     
     ' 3. Volvemos a llenar la lista
@@ -90,7 +90,7 @@ Sub FillListBox(jsonText As String)
     Dim Json As Object
     Dim Item As Object
     
-    ' 1. Verificación de seguridad: ¿Viene vacío?
+    ' 1. VerificaciÃ³n de seguridad: Â¿Viene vacÃ­o?
     If jsonText = "" Or jsonText = "[]" Then
         lstLogs.Clear
         Exit Sub
@@ -101,7 +101,7 @@ Sub FillListBox(jsonText As String)
     Set Json = JsonConverter.ParseJson(jsonText)
     On Error GoTo 0
     
-    ' Si el objeto no se creó, salimos antes de que explote
+    ' Si el objeto no se creÃ³, salimos antes de que explote
     If Json Is Nothing Then Exit Sub
     
     lstLogs.Clear
